@@ -19,7 +19,7 @@ namespace ProiectPAWRusuMihnea
 
         public override string ToString()
         {
-            return "ID:"+this.companyId+" Name: "+this.companyName ;
+            return companyName+"Co" ;
         }
     }
 }
