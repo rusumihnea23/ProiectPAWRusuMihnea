@@ -709,7 +709,7 @@ namespace ProiectPAWRusuMihnea
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            //ALT AND ARROW TO NAVIGATE BETWEEN TABS
+            
             if (e.Alt && e.KeyCode == Keys.Right)
             {
                 if (tabControl1.SelectedIndex < tabControl1.TabCount - 1)
@@ -720,7 +720,7 @@ namespace ProiectPAWRusuMihnea
                 if (tabControl1.SelectedIndex > 0)
                     tabControl1.SelectedIndex--;
             }
-            //ALT X TO EXIT
+
             
             if (e.Alt && e.KeyCode == Keys.X)
             {
