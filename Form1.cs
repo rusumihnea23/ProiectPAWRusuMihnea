@@ -9,13 +9,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
+using System.Drawing.Printing;
 namespace ProiectPAWRusuMihnea
 {
     public partial class Form1 : Form
     {
+        private PrintDocument printDocument1 = new PrintDocument();
+        private PrintPreviewDialog printPreviewDialog1 = new PrintPreviewDialog();
         private const string ConnectionString = "Data Source=database.db";
-        List<Route> routes;
+       public List<Route> routes;
         List<Company> CompanyList;
         List<Booking> BookingList;
         public Form1()
@@ -24,13 +26,37 @@ namespace ProiectPAWRusuMihnea
             BookingList=new List<Booking>();
             InitializeComponent();
             routes = new List<Route>();
+            printDocument1.PrintPage += printDocument1_PrintPage;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
         }
-
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1.PerformClick();
+                e.SuppressKeyPress = true; // Optional: prevents ding sound
+            }
+        }
+        private void ComboBoxRoute_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button2.PerformClick();
+                e.SuppressKeyPress = true; // Optional: prevents ding sound
+            }
+        }
+        private void ComboBoxBooking_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button3.PerformClick();
+                e.SuppressKeyPress = true; // Optional: prevents ding sound
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             if (!ValidareCompanies())
@@ -536,7 +562,12 @@ namespace ProiectPAWRusuMihnea
                 errorProvider1.SetError(dateTimePicker1, "Departure and return dates can't be the same");
                 errorProvider1.SetError(dateTimePicker2, "Departure and return dates can't be the same");
             }
-
+            if(dateTimePicker1.Value < dateTimePicker2.Value.Date)
+            {
+     
+            valid = false;
+                errorProvider1.SetError(dateTimePicker2, "Departure date must be earlier than return date");
+            }
             return valid;
         }
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
@@ -642,6 +673,113 @@ namespace ProiectPAWRusuMihnea
         private void label7_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BookingView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxBooking_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            ChartForm cf = new ChartForm(routes);
+            cf.ShowDialog();
+
+        }
+
+        private void toolStripStatusLabelRoutes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            //ALT AND ARROW TO NAVIGATE BETWEEN TABS
+            if (e.Alt && e.KeyCode == Keys.Right)
+            {
+                if (tabControl1.SelectedIndex < tabControl1.TabCount - 1)
+                    tabControl1.SelectedIndex++;
+            }
+            if (e.Alt && e.KeyCode == Keys.Left)
+            {
+                if (tabControl1.SelectedIndex > 0)
+                    tabControl1.SelectedIndex--;
+            }
+            //ALT X TO EXIT
+            
+            if (e.Alt && e.KeyCode == Keys.X)
+            {
+                Application.Exit();
+            }
+        }
+        private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            float y = 50; 
+            float x = 50; 
+            float lineHeight = 25;
+            Font headerFont = new Font("Arial", 14, FontStyle.Bold);
+            Font normalFont = new Font("Arial", 11);
+
+            // --- Companii ---
+            e.Graphics.DrawString("Lista companii:", headerFont, Brushes.DarkBlue, x, y);
+            y += lineHeight;
+            foreach (var c in CompanyList)
+            {
+                e.Graphics.DrawString($"{c.companyId}: {c.companyName}", normalFont, Brushes.Black, x, y);
+                y += lineHeight - 7;
+            }
+            y += lineHeight;
+
+            // --- Rute ---
+            e.Graphics.DrawString("Lista rute:", headerFont, Brushes.DarkGreen, x, y);
+            y += lineHeight;
+            foreach (var r in routes)
+            {
+                e.Graphics.DrawString(
+                    $"#{r.routeId}: {r.departure} → {r.destination} [{(r.company != null ? r.company.companyName : "Unknown")}]",
+                    normalFont, Brushes.Black, x, y
+                );
+                y += lineHeight - 7;
+            }
+            y += lineHeight;
+
+            // --- Booking-uri ---
+            e.Graphics.DrawString("Lista booking-uri:", headerFont, Brushes.DarkRed, x, y);
+            y += lineHeight;
+            foreach (var b in BookingList)
+            {
+                string routeStr = b.route != null ? $"{b.route.departure}→{b.route.destination}" : "N/A";
+                string companyStr = b.route?.company?.companyName ?? "Unknown";
+                e.Graphics.DrawString(
+                    $"#{b.bookingId}: {b.FirstName} {b.LastName}, ruta: {routeStr}, companie: {companyStr}, " +
+                    $"Plecare: {b.dateOfDeparture:dd/MM/yyyy}, Întoarcere: {b.dateOfReturn:dd/MM/yyyy}",
+                    normalFont, Brushes.Black, x, y
+                );
+                y += lineHeight - 7;
+            }
+
+            e.HasMorePages = true;
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog1.Document = printDocument1;
+            printPreviewDialog1.ShowDialog();
         }
     }
 
