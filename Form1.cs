@@ -137,7 +137,7 @@ namespace ProiectPAWRusuMihnea
 
         public void DisplayRoutes()
         {
-
+            comboBoxBooking.Items.Clear();
             RouteView.Items.Clear();
 
             foreach (Route route in routes)
@@ -594,7 +594,52 @@ namespace ProiectPAWRusuMihnea
             toolStripStatusLabelRoutes.Text = $"Total routes: {routes.Count}";
         }
 
-        private void statusStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+
+        private void ExportToTextFile<T>(List<T> list)
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+                sfd.FileName = typeof(T).Name.ToLower() + "s.txt"; // ex: companies.txt
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        using (var writer = new System.IO.StreamWriter(sfd.FileName))
+                        {
+                            foreach (var item in list)
+                                writer.WriteLine(item.ToString());
+                        }
+                        MessageBox.Show($"Exported successfully to {sfd.FileName}!");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error exporting: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+
+
+
+        private void routesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportToTextFile(routes);
+        }
+
+        private void companiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportToTextFile(CompanyList);
+        }
+
+        private void bookingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportToTextFile(BookingList);
+        }
+
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }

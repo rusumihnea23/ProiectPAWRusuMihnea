@@ -35,10 +35,14 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.serializeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deserializeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabelRoutes = new System.Windows.Forms.ToolStripStatusLabel();
             this.button2 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.RouteView = new System.Windows.Forms.ListView();
@@ -70,17 +74,19 @@
             this.textBoxBooking1 = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.sqLiteCommand1 = new System.Data.SQLite.SQLiteCommand();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.serializeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deserializeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripStatusLabelRoutes = new System.Windows.Forms.ToolStripStatusLabel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.routesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.companiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bookingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -119,7 +125,7 @@
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(276, 41);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(135, 249);
+            this.listView1.Size = new System.Drawing.Size(299, 249);
             this.listView1.TabIndex = 6;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -133,16 +139,40 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "Name";
+            this.columnHeader2.Width = 134;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.serializeToolStripMenuItem,
+            this.deserializeToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(152, 52);
+            // 
+            // serializeToolStripMenuItem
+            // 
+            this.serializeToolStripMenuItem.Name = "serializeToolStripMenuItem";
+            this.serializeToolStripMenuItem.Size = new System.Drawing.Size(151, 24);
+            this.serializeToolStripMenuItem.Text = "Serialize";
+            this.serializeToolStripMenuItem.Click += new System.EventHandler(this.serializeToolStripMenuItem_Click_1);
+            // 
+            // deserializeToolStripMenuItem
+            // 
+            this.deserializeToolStripMenuItem.Name = "deserializeToolStripMenuItem";
+            this.deserializeToolStripMenuItem.Size = new System.Drawing.Size(151, 24);
+            this.deserializeToolStripMenuItem.Text = "Deserialize";
+            this.deserializeToolStripMenuItem.Click += new System.EventHandler(this.deserializeToolStripMenuItem_Click);
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Location = new System.Drawing.Point(1, 12);
+            this.tabControl1.Location = new System.Drawing.Point(1, 30);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(805, 426);
+            this.tabControl1.Size = new System.Drawing.Size(800, 408);
             this.tabControl1.TabIndex = 8;
             // 
             // tabPage2
@@ -154,7 +184,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(797, 397);
+            this.tabPage2.Size = new System.Drawing.Size(792, 379);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Companies";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -172,7 +202,7 @@
             this.tabPage4.Controls.Add(this.comboBox1);
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(797, 397);
+            this.tabPage4.Size = new System.Drawing.Size(792, 379);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Routes";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -182,12 +212,18 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelRoutes});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 371);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 353);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(797, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(792, 26);
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
             this.statusStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip1_ItemClicked);
+            // 
+            // toolStripStatusLabelRoutes
+            // 
+            this.toolStripStatusLabelRoutes.Name = "toolStripStatusLabelRoutes";
+            this.toolStripStatusLabelRoutes.Size = new System.Drawing.Size(151, 20);
+            this.toolStripStatusLabelRoutes.Text = "toolStripStatusLabel1";
             // 
             // button2
             // 
@@ -216,9 +252,9 @@
             this.columnHeader5,
             this.columnHeader6});
             this.RouteView.HideSelection = false;
-            this.RouteView.Location = new System.Drawing.Point(350, 66);
+            this.RouteView.Location = new System.Drawing.Point(292, 66);
             this.RouteView.Name = "RouteView";
-            this.RouteView.Size = new System.Drawing.Size(332, 192);
+            this.RouteView.Size = new System.Drawing.Size(497, 198);
             this.RouteView.TabIndex = 7;
             this.RouteView.UseCompatibleStateImageBehavior = false;
             this.RouteView.UseWaitCursor = true;
@@ -229,18 +265,22 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "Departure";
+            this.columnHeader3.Width = 104;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Destination";
+            this.columnHeader4.Width = 114;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Route Id";
+            this.columnHeader5.Width = 68;
             // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "Company";
+            this.columnHeader6.Width = 128;
             // 
             // label4
             // 
@@ -262,26 +302,26 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(79, 109);
+            this.textBox4.Location = new System.Drawing.Point(44, 109);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 22);
+            this.textBox4.Size = new System.Drawing.Size(135, 22);
             this.textBox4.TabIndex = 2;
             this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(79, 66);
+            this.textBox3.Location = new System.Drawing.Point(44, 66);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 22);
+            this.textBox3.Size = new System.Drawing.Size(135, 22);
             this.textBox3.TabIndex = 1;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(79, 152);
+            this.comboBox1.Location = new System.Drawing.Point(44, 152);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 24);
+            this.comboBox1.Size = new System.Drawing.Size(135, 24);
             this.comboBox1.TabIndex = 0;
             // 
             // tabPage5
@@ -298,25 +338,28 @@
             this.tabPage5.Controls.Add(this.textBoxBooking1);
             this.tabPage5.Location = new System.Drawing.Point(4, 25);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(795, 380);
+            this.tabPage5.Size = new System.Drawing.Size(792, 379);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Bookings";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(30, 260);
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker2.Location = new System.Drawing.Point(41, 229);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(246, 22);
+            this.dateTimePicker2.Size = new System.Drawing.Size(117, 22);
             this.dateTimePicker2.TabIndex = 9;
             this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(30, 289);
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(41, 275);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(246, 22);
+            this.dateTimePicker1.Size = new System.Drawing.Size(117, 22);
             this.dateTimePicker1.TabIndex = 8;
+            this.dateTimePicker1.UseWaitCursor = true;
             // 
             // button3
             // 
@@ -338,9 +381,9 @@
             this.columnHeader11,
             this.RouteId});
             this.BookingView.HideSelection = false;
-            this.BookingView.Location = new System.Drawing.Point(312, 61);
+            this.BookingView.Location = new System.Drawing.Point(283, 61);
             this.BookingView.Name = "BookingView";
-            this.BookingView.Size = new System.Drawing.Size(463, 250);
+            this.BookingView.Size = new System.Drawing.Size(496, 250);
             this.BookingView.TabIndex = 6;
             this.BookingView.UseCompatibleStateImageBehavior = false;
             this.BookingView.View = System.Windows.Forms.View.Details;
@@ -377,16 +420,17 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(154, 218);
+            this.label7.Location = new System.Drawing.Point(205, 188);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(43, 16);
             this.label7.TabIndex = 5;
             this.label7.Text = "Route";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(148, 158);
+            this.label5.Location = new System.Drawing.Point(205, 131);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 16);
             this.label5.TabIndex = 4;
@@ -395,7 +439,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(145, 108);
+            this.label1.Location = new System.Drawing.Point(205, 75);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 16);
             this.label1.TabIndex = 3;
@@ -405,23 +449,23 @@
             // comboBoxBooking
             // 
             this.comboBoxBooking.FormattingEnabled = true;
-            this.comboBoxBooking.Location = new System.Drawing.Point(27, 215);
+            this.comboBoxBooking.Location = new System.Drawing.Point(41, 185);
             this.comboBoxBooking.Name = "comboBoxBooking";
-            this.comboBoxBooking.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxBooking.Size = new System.Drawing.Size(158, 24);
             this.comboBoxBooking.TabIndex = 2;
             // 
             // textBoxBooking2
             // 
-            this.textBoxBooking2.Location = new System.Drawing.Point(38, 155);
+            this.textBoxBooking2.Location = new System.Drawing.Point(41, 125);
             this.textBoxBooking2.Name = "textBoxBooking2";
-            this.textBoxBooking2.Size = new System.Drawing.Size(100, 22);
+            this.textBoxBooking2.Size = new System.Drawing.Size(158, 22);
             this.textBoxBooking2.TabIndex = 1;
             // 
             // textBoxBooking1
             // 
-            this.textBoxBooking1.Location = new System.Drawing.Point(38, 102);
+            this.textBoxBooking1.Location = new System.Drawing.Point(41, 72);
             this.textBoxBooking1.Name = "textBoxBooking1";
-            this.textBoxBooking1.Size = new System.Drawing.Size(100, 22);
+            this.textBoxBooking1.Size = new System.Drawing.Size(158, 22);
             this.textBoxBooking1.TabIndex = 0;
             // 
             // errorProvider1
@@ -432,44 +476,60 @@
             // 
             this.sqLiteCommand1.CommandText = null;
             // 
-            // contextMenuStrip1
+            // menuStrip1
             // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.serializeToolStripMenuItem,
-            this.deserializeToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(152, 52);
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(813, 28);
+            this.menuStrip1.TabIndex = 9;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // serializeToolStripMenuItem
+            // exportToolStripMenuItem
             // 
-            this.serializeToolStripMenuItem.Name = "serializeToolStripMenuItem";
-            this.serializeToolStripMenuItem.Size = new System.Drawing.Size(151, 24);
-            this.serializeToolStripMenuItem.Text = "Serialize";
-            this.serializeToolStripMenuItem.Click += new System.EventHandler(this.serializeToolStripMenuItem_Click_1);
+            this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.routesToolStripMenuItem,
+            this.companiesToolStripMenuItem,
+            this.bookingToolStripMenuItem});
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
+            this.exportToolStripMenuItem.Text = "Export";
             // 
-            // deserializeToolStripMenuItem
+            // routesToolStripMenuItem
             // 
-            this.deserializeToolStripMenuItem.Name = "deserializeToolStripMenuItem";
-            this.deserializeToolStripMenuItem.Size = new System.Drawing.Size(151, 24);
-            this.deserializeToolStripMenuItem.Text = "Deserialize";
-            this.deserializeToolStripMenuItem.Click += new System.EventHandler(this.deserializeToolStripMenuItem_Click);
+            this.routesToolStripMenuItem.Name = "routesToolStripMenuItem";
+            this.routesToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
+            this.routesToolStripMenuItem.Text = "Routes";
+            this.routesToolStripMenuItem.Click += new System.EventHandler(this.routesToolStripMenuItem_Click);
             // 
-            // toolStripStatusLabelRoutes
+            // companiesToolStripMenuItem
             // 
-            this.toolStripStatusLabelRoutes.Name = "toolStripStatusLabelRoutes";
-            this.toolStripStatusLabelRoutes.Size = new System.Drawing.Size(151, 20);
-            this.toolStripStatusLabelRoutes.Text = "toolStripStatusLabel1";
+            this.companiesToolStripMenuItem.Name = "companiesToolStripMenuItem";
+            this.companiesToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
+            this.companiesToolStripMenuItem.Text = "Companies";
+            this.companiesToolStripMenuItem.Click += new System.EventHandler(this.companiesToolStripMenuItem_Click);
+            // 
+            // bookingToolStripMenuItem
+            // 
+            this.bookingToolStripMenuItem.Name = "bookingToolStripMenuItem";
+            this.bookingToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
+            this.bookingToolStripMenuItem.Text = "Booking";
+            this.bookingToolStripMenuItem.Click += new System.EventHandler(this.bookingToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(813, 450);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabControl1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
@@ -480,8 +540,10 @@
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -532,6 +594,11 @@
         private System.Windows.Forms.ToolStripMenuItem serializeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deserializeToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelRoutes;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem routesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem companiesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bookingToolStripMenuItem;
     }
 }
 

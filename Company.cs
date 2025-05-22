@@ -26,7 +26,7 @@ namespace ProiectPAWRusuMihnea
 
         public override string ToString()
         {
-            return companyName+"Co" ;
+            return companyName ;
         }
     }
 }

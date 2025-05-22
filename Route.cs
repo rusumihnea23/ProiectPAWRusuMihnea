@@ -31,7 +31,7 @@ namespace ProiectPAWRusuMihnea
         }
         public override string ToString()
         {
-            return $"{departure} → {destination}";
+            return $"{departure} -> {destination} ";
         }
     }
 }
