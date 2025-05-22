@@ -1,6 +1,6 @@
 ﻿using ProiectPAWRusuMihnea;
 using System;
-
+[Serializable]
 public class Booking
 {
     public int bookingId { get; set; }

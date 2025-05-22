@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProiectPAWRusuMihnea
 {
+    [Serializable]
     public class Route
     {
         public string departure;
@@ -13,7 +14,7 @@ namespace ProiectPAWRusuMihnea
         public long routeId;
         public Company company;
 
-
+        public Route() { }
         public Route(string departure, string destination, long routeId, Company company)
         {
             this.departure = departure;

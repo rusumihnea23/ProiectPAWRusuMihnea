@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace ProiectPAWRusuMihnea
 {
+    [Serializable]
     public class Company
     {
         public long companyId { set; get; }
         public string companyName {  set; get; }
 
+        public Company() { }
         public Company(string companyName)
         {
            

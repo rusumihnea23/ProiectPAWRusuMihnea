@@ -151,7 +151,7 @@ namespace ProiectPAWRusuMihnea
                 comboBoxBooking.Items.Add(route);
 
             }
-
+            UpdateRouteCountStatus();
         }
        public bool ValidareRoutes()
         {
@@ -219,6 +219,7 @@ namespace ProiectPAWRusuMihnea
                 route.routeId = (long)command.ExecuteScalar();
 
                 routes.Add(route);
+                UpdateRouteCountStatus();
             }
         }
         private void AddCompany(Company company)
@@ -257,6 +258,7 @@ namespace ProiectPAWRusuMihnea
 
                 //Remove from the local copy
                 routes.Remove(route);
+                UpdateRouteCountStatus();
             }
         }
         private void DeleteCompany(Company company)
@@ -541,5 +543,61 @@ namespace ProiectPAWRusuMihnea
         {
 
         }
+
+
+
+        private void textToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        private void serializeToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                // Serializare CompanyList în XML
+                using (var fs = new System.IO.FileStream("companies.xml", System.IO.FileMode.Create))
+                {
+                    var serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<Company>));
+                    serializer.Serialize(fs, CompanyList);
+                }
+                MessageBox.Show("CompanyList salvat cu succes!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Eroare la salvare: " + ex.Message);
+            }
+        }
+
+        private void deserializeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Deserializare CompanyList din XML
+                using (var fs = new System.IO.FileStream("companies.xml", System.IO.FileMode.Open))
+                {
+                    var serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<Company>));
+                    CompanyList = (List<Company>)serializer.Deserialize(fs);
+                }
+                DisplayCompanies(); // ca să vezi datele în ListView
+                MessageBox.Show("CompanyList încărcat cu succes!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Eroare la încărcare: " + ex.Message);
+            }
+        }
+        private void UpdateRouteCountStatus()
+        {
+            toolStripStatusLabelRoutes.Text = $"Total routes: {routes.Count}";
+        }
+
+        private void statusStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
+
 }
