@@ -6,21 +6,31 @@ using System.Threading.Tasks;
 
 namespace ProiectPAWRusuMihnea
 {
-    internal class Route
+    public class Route
     {
         public string departure;
         public string destination;
-        public int routeId;
+        public long routeId;
         public Company company;
 
 
-        public Route(string departure, string destination, int routeId, Company company)
+        public Route(string departure, string destination, long routeId, Company company)
         {
             this.departure = departure;
             this.destination = destination;
             this.routeId = routeId;
             this.company = company;
         }
-
+        public Route(string departure, string destination, Company company)
+        {
+            this.departure = departure;
+            this.destination = destination;
+          
+            this.company = company;
+        }
+        public override string ToString()
+        {
+            return $"{departure} → {destination}";
+        }
     }
 }

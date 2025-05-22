@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace ProiectPAWRusuMihnea
 {
-    internal class Company
+    public class Company
     {
-        public int companyId { set; get; }
+        public long companyId { set; get; }
         public string companyName {  set; get; }
 
-        public Company(int companyId,string companyName)
+        public Company(string companyName)
+        {
+           
+            this.companyName = companyName;
+        }
+        public Company(long companyId,string companyName)
         {
             this.companyId = companyId;
             this.companyName = companyName;

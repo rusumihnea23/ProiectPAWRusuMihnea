@@ -1,22 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ProiectPAWRusuMihnea;
+using System;
 
-namespace ProiectPAWRusuMihnea
+public class Booking
 {
-    internal class Booking
-    {
-        public int bookingId {  get; set; }
-        public string CustomerName { get; set; }
-        public Route route { get; set; }
+    public int bookingId { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public Route route;
+    public DateTime dateOfDeparture { get; set; }
+    public DateTime dateOfReturn { get; set; }
 
-        public Booking(int bookingId, string customerName, Route route)
-        {
-            this.bookingId = bookingId;
-            CustomerName = customerName;
-            this.route = route;
-        }
+    public Booking(string firstName, string lastName, Route route, DateTime dep, DateTime ret)
+    {
+        this.FirstName = firstName;
+        this.LastName = lastName;
+        this.route = route;
+        this.dateOfDeparture = dep;
+        this.dateOfReturn = ret;
+    }
+
+    public Booking(int bookingId, string firstName, string lastName, Route route, DateTime dep, DateTime ret)
+    {
+        this.bookingId = bookingId;
+        this.FirstName = firstName;
+        this.LastName = lastName;
+        this.route = route;
+        this.dateOfDeparture = dep;
+        this.dateOfReturn = ret;
+    }
+
+    public override string ToString()
+    {
+        return $"{FirstName} {LastName} | {route?.departure} → {route?.destination} | {dateOfDeparture:yyyy-MM-dd}";
     }
 }
