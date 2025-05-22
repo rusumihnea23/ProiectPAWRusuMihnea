@@ -374,6 +374,8 @@ namespace ProiectPAWRusuMihnea
         //AICI
         private void button3_Click(object sender, EventArgs e)
         {
+            if (!ValidareBookings())
+                return;
             Booking b = new Booking(
                 textBoxBooking1.Text,
                 textBoxBooking2.Text,
@@ -502,6 +504,38 @@ namespace ProiectPAWRusuMihnea
                     DisplayBooking();
                 }
             }
+        }
+        public bool ValidareBookings()
+        {
+            errorProvider1.Clear();
+            bool valid = true;
+
+            if (string.IsNullOrWhiteSpace(textBoxBooking1.Text))
+            {
+                valid = false;
+                errorProvider1.SetError(textBoxBooking1, "First name cannot be empty");
+            }
+
+            if (string.IsNullOrWhiteSpace(textBoxBooking2.Text))
+            {
+                valid = false;
+                errorProvider1.SetError(textBoxBooking2, "Last name cannot be empty");
+            }
+
+            if (comboBoxBooking.SelectedItem == null)
+            {
+                valid = false;
+                errorProvider1.SetError(comboBoxBooking, "Route must be selected");
+            }
+
+            if (dateTimePicker1.Value.Date == dateTimePicker2.Value.Date)
+            {
+                valid = false;
+                errorProvider1.SetError(dateTimePicker1, "Departure and return dates can't be the same");
+                errorProvider1.SetError(dateTimePicker2, "Departure and return dates can't be the same");
+            }
+
+            return valid;
         }
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
